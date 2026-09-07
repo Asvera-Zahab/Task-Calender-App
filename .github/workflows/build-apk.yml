@@ -6,22 +6,31 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-android:
-    name: Build for Android
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        id: buildozer
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          command: buildozer android debug
-          buildozer_version: stable
+          python-version: '3.11'
 
-      - name: Upload artifacts
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config \
+            zlib1g-dev libncurses-dev cmake libffi-dev libssl-dev automake build-essential ccache
+
+      - name: Install Buildozer and Cython
+        run: pip install --upgrade buildozer cython==0.29.33
+
+      - name: Build APK
+        run: yes | buildozer -v android debug
+
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: task-calendar-apk
-          path: ${{ steps.buildozer.outputs.filename }}
+          path: bin/*.apk
