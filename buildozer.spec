@@ -13,7 +13,7 @@ version = 0.1
 icon.filename = %(source.dir)s/assets/icon/icon.png
 
 # Only kivy is needed - everything else is Python standard library (sqlite3, datetime, calendar).
-requirements = python3==3.11.9,kivy==2.3.0
+requirements = python3==3.11.9,hostpython3==3.11.9,kivy==2.3.0
 
 orientation = portrait
 fullscreen = 0
