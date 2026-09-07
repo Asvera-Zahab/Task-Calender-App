@@ -1,0 +1,25 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Build with Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v2
+        with:
+          command: buildozer android debug
+          buildozer_version: stable
+
+      - name: Upload the APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: task-calendar-apk
+          path: bin/*.apk
