@@ -27,6 +27,7 @@ android.minapi = 21
 android.ndk = 25b
 android.archs = arm64-v8a
 android.allow_backup = True
+android.accept_sdk_license = True
 
 # Keep old data (tasks) if the user updates the app later.
 android.wipe_data = 0
