@@ -1,0 +1,67 @@
+#:import theme taskapp.theme
+#:import PixelButton taskapp.widgets.PixelButton
+
+
+<TaskRow>:
+    size_hint_y: None
+    height: "52dp"
+    spacing: "4dp"
+    padding: [0, "2dp"]
+
+    PixelButton:
+        id: open_btn
+        text: ""
+        size_hint_x: 0.62
+
+    PixelButton:
+        id: edit_btn
+        text: "Edit"
+        size_hint_x: 0.19
+
+    PixelButton:
+        id: delete_btn
+        text: "X"
+        size_hint_x: 0.19
+
+
+<TaskListScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: theme.COLOR_BG
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        BoxLayout:
+            size_hint_y: None
+            height: "56dp"
+            padding: ["10dp", "8dp"]
+            spacing: "8dp"
+
+            Label:
+                text: "Tasks"
+                font_name: theme.FONT_PATH
+                font_size: "28sp"
+                color: theme.COLOR_TEXT
+                halign: "left"
+                text_size: self.size
+                valign: "middle"
+
+            PixelButton:
+                text: "+"
+                size_hint_x: None
+                width: "48dp"
+                on_release: root.add_task()
+
+        ScrollView:
+            do_scroll_x: False
+
+            BoxLayout:
+                id: task_container
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: "6dp"
+                padding: ["10dp", "4dp"]

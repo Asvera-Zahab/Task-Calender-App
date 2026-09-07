@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Local database (created at runtime, don't commit your personal data)
+*.db
+
+# Buildozer / Android build output
+.buildozer/
+bin/
+
+# OS/editor cruft
+.vscode/
+.DS_Store

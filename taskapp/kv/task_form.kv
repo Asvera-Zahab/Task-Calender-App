@@ -1,0 +1,170 @@
+#:import theme taskapp.theme
+#:import PixelButton taskapp.widgets.PixelButton
+
+
+<TaskFormScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: "14dp"
+        spacing: "8dp"
+        canvas.before:
+            Color:
+                rgba: theme.COLOR_BG
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            id: title_label
+            text: "New Task"
+            font_name: theme.FONT_PATH
+            font_size: "26sp"
+            color: theme.COLOR_TEXT
+            size_hint_y: None
+            height: "38dp"
+            halign: "left"
+            text_size: self.size
+
+        Label:
+            text: "Task name"
+            font_name: theme.FONT_PATH
+            font_size: "16sp"
+            color: theme.COLOR_TEXT_DIM
+            size_hint_y: None
+            height: "20dp"
+            halign: "left"
+            text_size: self.size
+
+        TextInput:
+            id: name_input
+            multiline: False
+            font_name: theme.FONT_PATH
+            font_size: "20sp"
+            background_color: theme.COLOR_SURFACE
+            background_normal: ""
+            background_active: ""
+            foreground_color: theme.COLOR_TEXT
+            cursor_color: theme.COLOR_ACCENT
+            size_hint_y: None
+            height: "44dp"
+            padding: ["8dp", "8dp"]
+
+        Label:
+            text: "Start date"
+            font_name: theme.FONT_PATH
+            font_size: "16sp"
+            color: theme.COLOR_TEXT_DIM
+            size_hint_y: None
+            height: "20dp"
+            halign: "left"
+            text_size: self.size
+
+        BoxLayout:
+            size_hint_y: None
+            height: "44dp"
+            spacing: "6dp"
+
+            Spinner:
+                id: start_day
+                text: "01"
+                font_name: theme.FONT_PATH
+                font_size: "18sp"
+                background_color: theme.COLOR_SURFACE
+                background_normal: ""
+                color: theme.COLOR_TEXT
+                on_text: root._refresh_days()
+
+            Spinner:
+                id: start_month
+                text: "01"
+                font_name: theme.FONT_PATH
+                font_size: "18sp"
+                background_color: theme.COLOR_SURFACE
+                background_normal: ""
+                color: theme.COLOR_TEXT
+                on_text: root._refresh_days()
+
+            Spinner:
+                id: start_year
+                text: ""
+                font_name: theme.FONT_PATH
+                font_size: "18sp"
+                background_color: theme.COLOR_SURFACE
+                background_normal: ""
+                color: theme.COLOR_TEXT
+                on_text: root._refresh_days()
+
+        Label:
+            text: "End date"
+            font_name: theme.FONT_PATH
+            font_size: "16sp"
+            color: theme.COLOR_TEXT_DIM
+            size_hint_y: None
+            height: "20dp"
+            halign: "left"
+            text_size: self.size
+
+        BoxLayout:
+            size_hint_y: None
+            height: "44dp"
+            spacing: "6dp"
+
+            Spinner:
+                id: end_day
+                text: "01"
+                font_name: theme.FONT_PATH
+                font_size: "18sp"
+                background_color: theme.COLOR_SURFACE
+                background_normal: ""
+                color: theme.COLOR_TEXT
+                on_text: root._refresh_days()
+
+            Spinner:
+                id: end_month
+                text: "01"
+                font_name: theme.FONT_PATH
+                font_size: "18sp"
+                background_color: theme.COLOR_SURFACE
+                background_normal: ""
+                color: theme.COLOR_TEXT
+                on_text: root._refresh_days()
+
+            Spinner:
+                id: end_year
+                text: ""
+                font_name: theme.FONT_PATH
+                font_size: "18sp"
+                background_color: theme.COLOR_SURFACE
+                background_normal: ""
+                color: theme.COLOR_TEXT
+                on_text: root._refresh_days()
+
+        Label:
+            text: root.error_text
+            font_name: theme.FONT_PATH
+            font_size: "15sp"
+            color: theme.COLOR_MISSED
+            size_hint_y: None
+            height: "22dp" if root.error_text else "0dp"
+            halign: "left"
+            text_size: self.size
+
+        Widget:
+
+        BoxLayout:
+            size_hint_y: None
+            height: "48dp"
+            spacing: "8dp"
+
+            PixelButton:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            PixelButton:
+                id: delete_btn
+                text: "Delete"
+                on_release: root.delete()
+
+            PixelButton:
+                text: "Save"
+                on_release: root.save()

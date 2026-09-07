@@ -1,0 +1,68 @@
+#:import theme taskapp.theme
+#:import PixelButton taskapp.widgets.PixelButton
+
+
+<CalendarViewScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: theme.COLOR_BG
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        BoxLayout:
+            size_hint_y: None
+            height: "52dp"
+            padding: ["8dp", "6dp"]
+            spacing: "8dp"
+
+            PixelButton:
+                text: "<"
+                size_hint_x: None
+                width: "44dp"
+                on_release: root.go_back()
+
+            Label:
+                text: root.header_text
+                font_name: theme.FONT_PATH
+                font_size: "22sp"
+                color: theme.COLOR_TEXT
+                halign: "left"
+                text_size: self.size
+                valign: "middle"
+
+        BoxLayout:
+            size_hint_y: None
+            height: "44dp"
+            padding: ["8dp", "0dp"]
+            spacing: "8dp"
+
+            PixelButton:
+                text: "<"
+                size_hint_x: None
+                width: "44dp"
+                on_release: root.prev_month()
+
+            Label:
+                text: root.month_label
+                font_name: theme.FONT_PATH
+                font_size: "18sp"
+                color: theme.COLOR_TEXT
+
+            PixelButton:
+                text: ">"
+                size_hint_x: None
+                width: "44dp"
+                on_release: root.next_month()
+
+        GridLayout:
+            id: calendar_grid
+            cols: 7
+            spacing: "2dp"
+            padding: "8dp"
+            size_hint_y: None
+            height: self.minimum_height
+
+        Widget:
